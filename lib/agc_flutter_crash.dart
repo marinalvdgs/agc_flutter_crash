@@ -1,6 +1,7 @@
 
 import 'dart:async';
 
+import 'package:agconnect_crash/agconnect_crash.dart';
 import 'package:flutter/services.dart';
 
 class AgcFlutterCrash {
@@ -9,5 +10,9 @@ class AgcFlutterCrash {
   static Future<String?> get platformVersion async {
     final String? version = await _channel.invokeMethod('getPlatformVersion');
     return version;
+  }
+
+  Future<void> enableCrash(bool enable) async {
+    await AGCCrash.instance.enableCrashCollection(enable);
   }
 }

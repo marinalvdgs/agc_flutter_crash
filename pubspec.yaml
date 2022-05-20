@@ -8,6 +8,7 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
+  agconnect_crash: ^1.2.0+300
   flutter:
     sdk: flutter
 
