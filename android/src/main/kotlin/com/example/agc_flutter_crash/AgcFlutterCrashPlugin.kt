@@ -30,7 +30,7 @@ class AgcFlutterCrashPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     if (call.method == "enableCrash") {
-      result.success(AgcFlutterService().enableCrash(call.arguments as Boolean))
+      result.success(AgcFlutterService().enableCrash(call.argument<String>("enable") as Boolean))
     } else if (call.method=="testCrash"){
       result.success(AgcFlutterService().testCrash(context))
     }
