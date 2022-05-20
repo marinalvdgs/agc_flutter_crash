@@ -21,18 +21,26 @@ class AgcFlutterCrashPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private lateinit var channel : MethodChannel
   private lateinit var context: Context
   private lateinit var activity: Activity
+  private lateinit var service : AgcFlutterService
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "agc_flutter_crash")
     channel.setMethodCallHandler(this)
     context = flutterPluginBinding.applicationContext
+    service = AgcFlutterService()
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    if (call.method == "enableCrash") {
-      result.success(AgcFlutterService().enableCrash(call.argument<String>("enable") as Boolean))
-    } else if (call.method=="testCrash"){
-      result.success(AgcFlutterService().testCrash(context))
+    when (call.method) {
+        "enableCrash" -> {
+          result.success(service.enableCrash(call.argument<Boolean>("enable")!!))
+        }
+        "testCrash" -> {
+          result.success(service.testCrash(context))
+        }
+        else -> {
+          result.notImplemented()
+        }
     }
   }
 
