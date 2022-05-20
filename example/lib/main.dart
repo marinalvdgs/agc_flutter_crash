@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:agc_flutter_crash/agc_flutter_crash.dart';
 
 void main() {
@@ -26,6 +24,9 @@ class _MyAppState extends State<MyApp> {
         body: const Center(
           child: Text('Running on: \n'),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          AgcFlutterCrash.testCrash();
+        }),
       ),
     );
   }
